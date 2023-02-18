@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    .button-headline-container{
+        
+        position: fixed;
+        bottom: 600;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .button-container{
+        position: absolute;
+        bottom: -480;
+        left: 515;
+        width: 100%;
+        text-align: center;
+    }
+    
+    h2{
+        margin-button:50px;
+        display: bloack;
+    }
+    
+
+    
+    
+</style>
+
+
+<div class= 'button-headline-container'>
+
+
+    <div>
+                        <p class="h2" style="margin-bottom: 15px">Choose the Region </p>
+    </div>
+    
+    
+    <div class='button-container'>
+        
+        
+        <div class="list-group">
+            {% for region in regions %}
+                <a href="{% url 'stops:region-stops' region %}" style="width: 490px; height: 45; margin-bottom: 10px" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">{{region}}</a>
+            {% endfor %}
+        </div>
+        
+        
+    </div>
+             
+    
+</div>
+{% endblock %}
+
+
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,69 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    .button-headline-container{
+        
+        position: fixed;
+        bottom: 450;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .button-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        position: fixed;
+        bottom: 250;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    
+    
+    
+</style>
+
+
+<div class= 'button-headline-container'>
+
+
+    <div>
+                        <p class="h2">Choose the Transportation Type </p>
+    </div>
+    
+    
+    <div class='button-container'>
+        <div>
+            <a href="{% url 'transportation:transportation' 'bus'%}"   style="width: 290px" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">BUS</a>
+            <br>
+            <br>
+            <a href="{% url 'transportation:transportation' 'metro'%}" style="width: 290px" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">METRO</a>
+        </div>
+        
+        
+        <div>
+            <a href="{% url 'transportation:transportation' 'trolleybus'%}"  style="width: 290px" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">TROLLEYBUS</a>
+            <br>
+            <br>
+            <a href="{% url 'transportation:transportation' 'microbus'%}" style="width: 290px" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">MICROBUS</a>
+        </div>
+    </div>
+             
+    
+</div>
+{% endblock %}
+
+
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,72 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" href="{% static 'user/css/edit.css' %}">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+            <!-- begin profile -->
+            <div class="profile">
+               <div class="profile-header">
+                  <!-- BEGIN profile-header-cover -->
+                  <div class="profile-header-cover"></div>
+                  <!-- END profile-header-cover -->
+                  <!-- BEGIN profile-header-content -->
+                  <div class="profile-header-content">
+                     <!-- BEGIN profile-header-img -->
+                     <div class="profile-header-img">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                     </div>
+                     <!-- END profile-header-img -->
+                     <!-- BEGIN profile-header-info -->
+                     <div class="profile-header-info">
+                        <h4 class="m-t-10 m-b-5">{{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</h4>
+                        <a href="{% url 'delete' %}" class="btn btn-sm btn-info mb-2">Delete Profile</a>
+
+                        <p class="m-b-10"></p>
+                        <br>
+                        <br>
+                        <br>
+                     </div>
+                     <!-- END profile-header-info -->
+                  </div>
+                  <!-- END profile-header-content -->
+                  <!-- BEGIN profile-header-tab -->
+                  <ul class="profile-header-tab nav nav-tabs">
+
+                  </ul>
+                  <!-- END profile-header-tab -->
+               </div>
+            </div>
+            <!-- end profile -->
+            <!-- begin profile-content -->
+            <div class="profile-content">
+               <!-- begin tab-content -->
+               <div class="tab-content p-0">
+
+                  <!-- begin #profile-about tab -->
+                  <div class="tab-pane fade in active show" id="profile-about">
+                     <!-- begin table -->
+                     <div class="table-responsive">
+                        <table class="table table-profile">
+                           <thead>
+                              <tr>
+                                 <th></th>
+                                
+                              </tr>
+                           </thead>
+                           <div class="container">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                {{ profile_form.as_p }}
+                                <p><button type="submit">Save</button><button type="submit" class="btn btn-info"><a href="{% url 'profile' %}">Cancel</a></button>
+                                </p>
+                            </form>
+                        </div>
+                                 

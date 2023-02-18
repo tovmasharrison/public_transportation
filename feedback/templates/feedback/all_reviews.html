@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<br>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transportation Reviews - All Reviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'feedback/css/all_reviews.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).on('click', '.like-btn', function(event){
+          event.preventDefault();
+          var reviewId = $(this).data('review-id');
+          var url = $(this).data('like-url');
+
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()
+              }
+          });
+
+          $.ajax({
+              type: 'POST',
+              url: url,
+              data: {
+                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+                  'review_id': reviewId
+              },
+              success: function (response) {
+                  // update like button
+                  var likeBtn = $('.like-btn[data-review-id="' + reviewId + '"]');
+                  if (response.is_liked) {
+                      likeBtn.addClass('liked').text('Unlike');
+                  } else {
+                      likeBtn.removeClass('liked').text('Like');
+                  }
+
+                  // update likes count
+                  var likesCount = $('.likes-count[data-review-id="' + reviewId + '"]');
+                  likesCount.text(response.likes_count + ' like' + (response.likes_count !== 1 ? 's' : ''));
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Transportation Reviews</h1>
+    </header>
+    <main>
+      <h2>All Reviews</h2>
+      <div class="reviews-container">
+          
+        {% for review in reviews %}
+        <div class="review">
+          <div class="reviewer-info">
+            <h3>{{ review.name }}</h3>
+            <span class="rating"><a href="#">{{ review.transport }}</a>, {{ review.rate }} <img src="{% static 'feedback/image/star.webp' %}" width="15px;" height="15px;" alt=""></span>
+          </div>
+          <p>{{ review.review }}</p>
+          <a href="{% url 'feedback:comment' review.id %}">{{ review.comments.count }} comment{{ review.comments.count|pluralize }}</a>
+
+          <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="review_id" value="{{ review.id }}">
+            {% if user.is_authenticated %}
+              {% if user_review_likes|length > 0 and review.id in user_review_likes %}
+                <button type="submit" class="like-btn liked" name="like" value="unlike" data-review-id="{{ review.id }}" data-like-url="{% url 'feedback:like_review' review.id %}">Unlike</button>
+              {% else %}
+                <button type="submit" class="like-btn" name="like" value="like" data-review-id="{{ review.id }}" data-like-url="{% url 'feedback:like_review' review.id %}">Like</button>
+              {% endif %}
+            {% else %}
+              <button type="submit" class="like-btn" name="like" value="like" disabled>Like</button>
+            {% endif %}
+          </form>
+
+          {% if review.likes.count > 0 %}
+            <p class="likes-count" data-review-id="{{ review.id }}">{{ review.likes.count }} like{{ review.likes.count|pluralize }}</p>
+          {% else %}
+            <p class="likes-count" data-review-id="{{ review.id }}">Be the first to like this review!</p>
+          {% endif %}
+         
+        </div>
+
+      {% endfor %}
+      
+    </div>
+    <br>
+    <br>
+    
+    {% include 'user/paginate.html' %}
+
+      {% endblock %}
+      

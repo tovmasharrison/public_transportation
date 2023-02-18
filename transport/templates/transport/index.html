@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+
+<div class="search-container">
+    <div class="search-form">
+        <form method="get" action="{% url 'transport:index' %}">
+            <label for="start_point"></label>
+            <input type="text" id="start_point" name="start_point" placeholder="Enter start point">
+            <br>
+            <br>
+            <label for="end_point"></label>
+            <input type="text" id="end_point" name="end_point" placeholder="Enter end point">
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+    </div>
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+
+        <link rel="stylesheet" href="{% static 'transport/css/bg.css' %}">
+        <link rel="stylesheet" href="{% static 'transport/css/index.css' %}">
+
+
+        <title>{% block title %}{{title}}{% endblock %}</title>
+
+    </head>
+
+    <body id="bg-image" style="background-image: url({% static 'transport/image/bg.jpg' %});">
+
+
+        <div class="icon">
+            <a href="{% url 'stops:regions' %}">
+                <img src="{% static 'transport/image/stop.png' %}"
+                    style="position: absolute; bottom: 120px; left: 40%;">
+            </a>
+        </div>
+        <div class="icon">
+            <a href="{% url 'transportation:types' %}">
+                <img src="{% static 'transport/image/bus.png' %}"
+                    style="position: absolute; bottom: 120px; left: 70px;">
+            </a>
+        </div>
+        <div class="icon">
+            <a href="{% url 'feedback:feedbacks' %}">
+                <img src="{% static 'transport/image/feedback.png' %}"
+                    style="position: absolute; bottom: 120px; right: 70px;">
+            </a>
+
+        </div>
+
+
+    </body>
+
+    </html>
+
+    {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<style>
+    .container {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+
+    }
+</style>
+
+
+<div class='container>
+<div>
+    <h3>&nbsp&nbsp Registered transports of type ' {{t_type}}' </div>
+
+    <a href="{% url 'transportation:create-transport' %}"><button type="button" class="btn btn-light"> Add </button></a>
+    </h3>
+    <ul class="list-group">
+        {% for transport in transports %}
+        <br><a href="{% url 'transportation:details' t_type=t_type pk=transport.id %}">
+            <li class="list-group-item list-group-item-success" style="background-color: #B0C4DE"> N{{transport.number}}
+            </li>
+        </a>
+
+        <div>
+            <a href="{% url 'transportation:update-transport' transport.pk %}"><button type="button"
+                    class="btn btn-light"> Update </button></a>
+            <a href="{% url 'transportation:delete-transport' transport.pk %}"><button type="button"
+                    class="btn btn-light"> Delete </button></a>
+        </div>
+        {% endfor %}
+    </ul>
+
+    {% endblock %}

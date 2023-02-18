@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static '/feedback/css/comment.css' %}">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<section class="content-item" id="comments">
+    <div class="container">   
+    	<div class="row">
+            <div class="col-sm-8">   
+                <form  action="." method="POST" class="comment-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="review_id" value="{{ review.id }}">
+                    <div class="form-group">
+                      {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                
+                <!-- COMMENT 1 - START -->
+                {% for com in comments %}
+                <br>
+               
+
+                <div class="media">
+                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ com.name }}</h4>
+                        <p>{{ com.body }}</p>
+                        <ul class="list-unstyled list-inline media-detail pull-left">
+                            <li><i class="fa fa-calendar"></i>{{ com.created }}</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+                {% endfor %}
+                
+
+                <!-- COMMENT 1 - END -->
+
+            
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

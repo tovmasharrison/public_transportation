@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+ 
+
+
+<div class="container">
+  <h2> N{{transport.number}} {{t_type.capitalize}} </h2>
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">Route</div>
+      <div class="panel-body">{{transport.route}}</div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Stops</div>
+      <div class="panel-body">
+          <p>{% for stop in transport.stop.all %}
+              <a href="{% url 'stops:stop-details' stop.pk %}"> {{ stop }} </a> &nbsp;&nbsp;
+          {% endfor %}
+          </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .products, .feedback, .latest-reviews {
+    width: 30%;
+  }
+  
+  .products ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .products ul li {
+    margin-bottom: 10px;
+  }
+  
+  .latest-reviews ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .latest-reviews ul li {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+  }
+  
+  .reviewer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .rating {
+    font-size: 16px;
+    font-weight: bold;
+    color: #f39c12;
+  }
+  
+  .feedback form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .feedback label {
+    margin-bottom: 10px;
+  }
+  
+  .feedback input,
+  .feedback select,
+  .feedback textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .feedback input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .feedback input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  .view-all-reviews {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
