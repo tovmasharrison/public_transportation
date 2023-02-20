@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from django.views.generic import TemplateView
@@ -61,7 +61,7 @@ def create_transport(request):
 
 def update_transport(request, pk):
     title = 'Update|Transport'
-    transport = Transportation.objects.get(id=pk)
+    transport = get_object_or_404(Transportation, pk=pk)
     form = TransportForm(instance = transport)
     
     if request.method == 'POST':
@@ -72,7 +72,6 @@ def update_transport(request, pk):
             return redirect(transport)
     context = {'title':title, 'form' : form}
     return render(request, 'stop/create_stop.html', context)
-
 
 
 def delete_transport(request, pk):

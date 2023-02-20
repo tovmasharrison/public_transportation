@@ -15,7 +15,7 @@ class Transportation(models.Model):
     type = models.CharField(max_length=30, choices=Type.choices)
     route = models.TextField()
     stop = models.ManyToManyField(BusStop, related_name = 'transports')
-    # amortization
+    
 
     class Meta:
         ordering = ["number"]
@@ -60,9 +60,9 @@ class Review(models.Model):
         return self.review
 
 
-class BusStop(models.Model):
-    # location = 
-    transport = models.ForeignKey(Transportation, on_delete=models.PROTECT, related_name = "stops")
+# class BusStop(models.Model):
+#     # location = 
+#     transport = models.ForeignKey(Transportation, on_delete=models.PROTECT, related_name = "stops")
 
 
 class Comment(models.Model):
@@ -79,11 +79,10 @@ class Comment(models.Model):
         ]
 
     def __str__(self):
+#     # location = 
+#     transport = models.ForeignKey(Transportation, on_delete=models.PROTECT, related_name = "stops"
+
         return f"{self.name}"
 
     def get_absolute_url(self):
         return reverse("feedback/comment.html")
-
-
-
-

@@ -1,16 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import CreateView, TemplateView, ListView
-from django.views.generic.edit import FormMixin
-from django.utils.decorators import method_decorator
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import CreateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
 
 from .forms import ReviewForm
 from .models import Like
-from transport.models import Review, Transportation, Comment
+from transport.models import Review, Transportation
 from transport.forms import CommentForm
 
 
