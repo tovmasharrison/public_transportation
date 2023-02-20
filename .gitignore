@@ -1,0 +1,14 @@
+.env
+
+venv/
+
+*.pyc
+__pycache__/
+
+**/migrations/
+
+.idea/
+.vscode/
+*.pydevproject
+
+# db.sqlite3
