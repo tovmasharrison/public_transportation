@@ -40,18 +40,40 @@
 .search-form button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+ 
+.search-form form{
+    display: flex;
+    width: 100%;
+}
 
-.search-results {
-margin-top: 80px;
-margin-left: 80px;
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
-grid-gap: 10px;
+
+.search-container{
+    display: block;
+}
+
+.search-results{
+    width: 100%;
+}
+
+
+/* .search-results {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 80px;
+} */
+
+.bus-item {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #ffffff;
+    border-radius: 5px;
+
 }
 .search-results h2 {
     margin: 0;
@@ -62,15 +84,14 @@ grid-gap: 10px;
     margin: 0;
     padding: 0;
     list-style: none;
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 10px;
 }
 
 .search-results li {
     margin: 10px 0;
-    background-color: #000000;
+    background-color: #00ff40;
     padding: 10px;
     border-radius: 5px;
 }
-    
+

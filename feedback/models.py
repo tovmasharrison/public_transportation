@@ -1,8 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib.auth.models import User
-from django.urls import reverse
 
 from transport.models import Review
+
+
+User = get_user_model()
 
 
 class Like(models.Model):

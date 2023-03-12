@@ -1,17 +1,23 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView, ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
+from django.views.generic import CreateView, DeleteView, ListView
+
+from helpers.decorators_own import is_review_owner
+from transport.forms import CommentForm
+from transport.models import Review, Transportation
 
 from .forms import ReviewForm
 from .models import Like
-from transport.models import Review, Transportation
-from transport.forms import CommentForm
 
 
 class IndexView(LoginRequiredMixin, CreateView):
+    """ Home page for Feedback """
+
     template_name = 'feedback/index.html'
     model = Review
     form_class = ReviewForm
@@ -19,9 +25,8 @@ class IndexView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['transportation'] = Transportation.objects.all()
+        context['transportation'] = Transportation.objects.order_by("type", "number")
         context['latest_reviews'] = Review.objects.order_by("-created_at")[:5]
-        # print(context['latest_reviews'])
         return context
 
     def form_valid(self, form):
@@ -29,18 +34,14 @@ class IndexView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-# class CommentView(TemplateView):
-#     template_name = "feedback/comment.html"
-
-
-
-
 class AllReviews(LoginRequiredMixin, ListView):
+    """ Page to see all the reviews and likes """
+
     model = Review
     template_name = 'feedback/all_reviews.html'
     context_object_name = "reviews"
     paginate_by = 8
- 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
@@ -49,10 +50,20 @@ class AllReviews(LoginRequiredMixin, ListView):
         return context
 
 
+@method_decorator(is_review_owner, name="dispatch")
+class DeleteReview(LoginRequiredMixin, DeleteView):
+    """ Class based view for deleting a review """
+
+    model = Review
+    success_url = reverse_lazy("feedback:all_reviews")
+    template_name = "feedback/delete_review.html"
+
 
 @require_POST
 @login_required
 def like_review(request, review_id):
+    """ Function for allowing users to like a review """
+
     review = get_object_or_404(Review, pk=review_id)
 
     try:
@@ -71,8 +82,9 @@ def like_review(request, review_id):
     return JsonResponse(data)
 
 
-
 def post_comment(request, pk):
+    """ Function for allowing users to comment on a review """
+
     review = get_object_or_404(Review, pk=pk)
     comments = review.comments.order_by("-created")
     comment = None
@@ -82,21 +94,7 @@ def post_comment(request, pk):
         comment.review = review
         comment.name = request.user
         comment.save()
+        return redirect(".")
     return render(request, "feedback/comment.html", {
         "review": review, "form": form, "comment": comment, "comments": comments
     })
-
-# class CommentSubmit(LoginRequiredMixin, CreateView):
-#     model = Comment
-#     form_class = CommentForm
-#     template_name = "feedback/comment.html"
-#     success_url = "."
-#     pk_url_kwarg = "pk"
-
-#     def form_valid(self, form):
-#         review = get_object_or_404(Review, pk=self.kwargs['pk'])
-#         form.instance.review = review
-#         form.instance.name = self.request.user
-#         return super().form_valid(form)
-
-    

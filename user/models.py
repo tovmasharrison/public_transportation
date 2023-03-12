@@ -1,15 +1,17 @@
+from django.contrib.auth.models import User
 from django.db import models
-from django.dispatch import receiver
-from django.contrib.auth.models import User 
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-from helpers.image_paths import upload_profile_image
+from helpers.image_paths import default_profile_image, upload_profile_image
 
 
 class Profile(models.Model):
+    """ User Profile model """
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
-    image = models.ImageField(upload_to=upload_profile_image, blank=True) # Default profile image petq a drvi
+    image = models.ImageField(upload_to=upload_profile_image, default=default_profile_image)
 
     def __str__(self):
         return f"{self.user}"
@@ -17,6 +19,8 @@ class Profile(models.Model):
 
 @receiver(post_save, sender=User)
 def send_profile_signal(sender, created, instance, **kwargs):
+    """ Automatically creates a profile when user is registered """
+
     if created:
         Profile.objects.create(user=instance)
         instance.profile.save()

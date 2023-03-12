@@ -29,19 +29,15 @@
           <li class="nav-item">
             <a class="nav-link active flex-column text-center" aria-current="page" href="{% url 'transportation:index' %}"><i class="fas fa-home fa-lg"></i><span class="small "> Home</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link flex-column text-center" aria-current="page" href="{% url 'transportation:about_us' %}"><i class="fas fa-user-friends fa-lg"></i><span class="small "> About Us</span></a>
-          </li>
-          
             <div class="dropdown">
               <button class="btn dropdown-toggle log_reg_button" type="button" data-bs-toggle="dropdown">
                 <img
-                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{%else%}/media/images/default/default_profile.jpg{% endif %}"
                 class="rounded-circle"
                 height="30"
                 alt=""
                 loading="lazy"
-              />Hello, {{ request.user.first_name|default:request.user.username}}</button>
+              />{% if request.user.is_authenticated %}Hello, {{ request.user.first_name|default:request.user.username}}{% endif %}</button>
               <ul class="dropdown-menu log_reg_drop">
                 {% if request.user.is_authenticated %}
                   <li class="px-2"><a class="navbar-brand" href="{% url 'profile' %}">My profile</a></li>

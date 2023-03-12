@@ -11,48 +11,53 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Transportation Feedback Page</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="products">
-        <h2>Transportations</h2>
-        <ul>
-            {% for transport in transportation %}
-          <li><a href="{% url 'transportation:details' transport.type transport.pk %}">{{ transport }}</a></li>
-            {% endfor %}
-        </ul>
-      </div>
-      <div class="feedback">
-        <h2>Leave a Review</h2>
-        <form method="POST">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <input type="submit" value="Submit">
-        </form>
-      </div>
-      <div class="latest-reviews">
-        <h2>Latest Reviews</h2>
-        {% for review in latest_reviews %}
-        <ul>
-          <li>
-            <div class="reviewer-info">
-              <h3>{{ review.name }}</h3>
-              <span class="rating">{{ review.transport }}, {{ review.rate }} <img src="{% static 'feedback/image/star.webp' %}" width="15px;" height="15px;" alt="star{{ review.rate|pluralize }}"></span>
-            </div>
-            <p>{{ review.review }}</p>
-          </li>
-          
-        </ul>
+
+<head>
+  <title>Transportation Feedback Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="products">
+      <h2>Transportations</h2>
+      <ul>
+        {% for transport in transportation %}
+        <li><a href="{% url 'transportation:details' transport.type transport.pk %}">{{ transport }}</a></li>
         {% endfor %}
-        <a href="{% url 'feedback:all_reviews' %}" class="view-all-reviews">View All Reviews</a>
-        <br>
-        <br>
-      </div>
+      </ul>
     </div>
-  </body>
+    <div class="feedback">
+      <h2>Leave a Review</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="latest-reviews">
+      <h2>Latest Reviews</h2>
+      {% for review in latest_reviews %}
+      <ul>
+        <li>
+          <div class="reviewer-info">
+            <h3>{{ review.name }}</h3>
+            <span class="rating">{{ review.transport }}, {{ review.rate }} <img
+                src="{% static 'feedback/image/star.webp' %}" width="15px;" height="15px;"
+                alt="star{{ review.rate|pluralize }}"></span>
+          </div>
+          <p>{{ review.review }}</p>
+        </li>
+
+      </ul>
+      {% endfor %}
+      <a href="{% url 'feedback:all_reviews' %}" class="view-all-reviews">View All Reviews</a>
+      <br>
+      <br>
+    </div>
+  </div>
+</body>
+
 </html>
 
 {% endblock %}

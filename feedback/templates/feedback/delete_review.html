@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/css/delete.css' %}">
+  
+
+<div class="container">
+  <h1>Confirm Review Deletion</h1>
+  <p>Are you sure you want to delete your review?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete my review</button>
+    <a href="{% url 'feedback:all_reviews' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>

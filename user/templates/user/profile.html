@@ -22,7 +22,7 @@
                      <div class="profile-header-img">
 
                <!-- ***********NKARI PAHY VERANAYEL********** -->
-                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                     <img src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{%else%}/media/images/default/default_profile.jpg{% endif %}" alt="">
                      </div>
                      <!-- END profile-header-img -->
                      <!-- BEGIN profile-header-info -->
@@ -76,7 +76,7 @@
                            
                            <div class="timeline-body">
                               <div class="timeline-header">
-                                 <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+                                 <span class="userimage"><img src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{%else%}/media/images/default/default_profile.jpg{% endif %}" alt=""></span>
                                  <span class="username"><a href="javascript:;">{{ review.name }}</a> <small></small></span>
                                  <span style="text-align:center">Rate:{{ review.rate }}</span>
                                  <span class="pull-right text-muted">Review on: {{ review.transport }}</span>
@@ -95,10 +95,7 @@
                                     <span class="stats-text">{{ review.comments.count }} comment{{ review.comments.count|pluralize }}</span>
                                  </div>
                                  <div class="stats">
-                                    <span class="fa-stack fa-fw stats-icon">
-                                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                    <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
-                                    </span>
+                                    
                                     <span class="fa-stack fa-fw stats-icon">
                                     <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                     <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>

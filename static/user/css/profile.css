@@ -545,7 +545,8 @@ select.form-control:not([size]):not([multiple]) {
 .timeline-content {
     letter-spacing: .25px;
     line-height: 18px;
-    font-size: 13px
+    font-size: 13px;
+    word-wrap: break-word;
 }
 
 .timeline-content:after,

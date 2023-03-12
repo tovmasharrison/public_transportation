@@ -4,9 +4,8 @@ from transport.models import Review
 
 
 class ReviewForm(forms.ModelForm):
+    """ Form for submitting a review """
+
     class Meta:
         model = Review
         fields = ["transport", "rate", "review"]
-
-    # def save(self, commit: bool = True):
-    #     return super().save(commit)

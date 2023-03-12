@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('stop', '0001_initial'),
+        # ('stop', '0001_initial'),
         ('transport', '0005_alter_review_rate'),
     ]
 

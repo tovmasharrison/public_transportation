@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from .models import Transportation, Review, Comment
+from .models import Review, Transportation
+
+
 # Register your models here.
 @admin.register(Transportation)
 class TransportationAdmin(admin.ModelAdmin):
@@ -11,5 +13,3 @@ class TransportationAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ["name", "rate", "transport"]
     raw_id_fields = ["name", "transport"]
-
-admin.site.register(Comment)

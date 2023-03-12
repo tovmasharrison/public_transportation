@@ -14,11 +14,14 @@
   
   .products ul li {
     margin-bottom: 10px;
+
   }
   
   .latest-reviews ul {
     list-style-type: none;
     padding: 0;
+    word-wrap: break-word;
+
   }
   
   .latest-reviews ul li {

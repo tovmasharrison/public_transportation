@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<br>
 <link rel="stylesheet" href="{% static '/feedback/css/comment.css' %}">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <section class="content-item" id="comments">
@@ -23,7 +24,7 @@
                
 
                 <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
+                    <a class="pull-left" href="#"><img class="media-object" src="{% if request.user.profile.image %}{{ request.user.profile.image.url }}{%else%}/media/images/default/default_profile.jpg{% endif %}" alt=""></a>
                     <div class="media-body">
                         <h4 class="media-heading">{{ com.name }}</h4>
                         <p>{{ com.body }}</p>

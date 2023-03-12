@@ -5,10 +5,17 @@ venv/
 *.pyc
 __pycache__/
 
-**/migrations/
+# **/migrations/
 
 .idea/
 .vscode/
 *.pydevproject
 
-# db.sqlite3
+db.sqlite3
+
+.flake8
+
+cert.crt
+cert.key
+datadump.json
+

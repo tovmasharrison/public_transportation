@@ -3,18 +3,50 @@
 {% load static %}
 {% block content %}
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Attach a keyup event listener to the search input field
+        $('#start_input').on('keyup', function() {
+            // Get the current value of the search input
+            var query = $(this).val();
+
+            // Send an AJAX request to the server to get search results
+            $.ajax({
+                url: '',  // modify this line
+                data: { 'start_point': query },
+                success: function(data) {
+                    // Display the search results in a dropdown menu
+                    $('#search-results').html(data);
+                }
+            });
+        });
+    });
+</script>
+
+
 
 <div class="search-container">
     <div class="search-form">
         <form method="get" action="{% url 'transport:index' %}">
             <label for="start_point"></label>
-            <input type="text" id="start_point" name="start_point" placeholder="Enter start point">
+            <input type="text" id="start_input" name="start_point" placeholder="Enter start point">
             <br>
             <br>
             <label for="end_point"></label>
             <input type="text" id="end_point" name="end_point" placeholder="Enter end point">
             <button type="submit" class="btn btn-success">Search</button>
         </form>
+    </div>
+    {% if buses %}
+    <div class="search-results">
+        {% for bus in buses %}
+            <div class="bus-item"><a href="{% url 'transportation:details' bus.type bus.pk %}">{{ bus.number }}</a></div>
+        {% endfor %}
+    </div>
+{% endif %}
+
     </div>
 
     <!DOCTYPE html>
@@ -32,31 +64,24 @@
     </head>
 
     <body id="bg-image" style="background-image: url({% static 'transport/image/bg.jpg' %});">
-
-
-        <div class="icon">
-            <a href="{% url 'stops:regions' %}">
-                <img src="{% static 'transport/image/stop.png' %}"
-                    style="position: absolute; bottom: 120px; left: 40%;">
-            </a>
-        </div>
-        <div class="icon">
+        <div class="icon" style="position: relative;">
             <a href="{% url 'transportation:types' %}">
-                <img src="{% static 'transport/image/bus.png' %}"
-                    style="position: absolute; bottom: 120px; left: 70px;">
+                <img src="{% static 'transport/image/bus.png' %}" style="position: absolute; bottom: 30px; right: 240px;">
+                <figcaption style="position: absolute; bottom: 5px; right: 305px; font-size: 20px;">Transportations</figcaption>
             </a>
         </div>
-        <div class="icon">
+        <div class="icon" style="position: relative;">
             <a href="{% url 'feedback:feedbacks' %}">
-                <img src="{% static 'transport/image/feedback.png' %}"
-                    style="position: absolute; bottom: 120px; right: 70px;">
+                <img src="{% static 'transport/image/feedback.png' %}" style="position: absolute; bottom: 30px; left: 1px;">
+                <figcaption style="position: absolute; bottom: 5px; left: 85px; font-size: 20px;">Feedback</figcaption>
             </a>
-
         </div>
-
-
     </body>
-
+    
+    
+    
     </html>
+
+
 
     {% endblock %}
