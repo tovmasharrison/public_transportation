@@ -1,16 +1,18 @@
-{% extends 'base.html' %}
 
-{% block content %}
-<div>
+{% load static %}
 
-    <form method = 'POST' action = ''> 
-        {% csrf_token %}  
-        
-        <p> Are you sure you want to delete "{{obj}}"?</p>
-        <a href = "{{request.META.HTTP_REFERER}}"> Go Back </a>
-        <input type = 'submit' value = 'Confirm'/>
-    
-    </form>
+
+<link rel="stylesheet" type="text/css" href="{% static 'user/css/delete.css' %}">
+  
+
+<div class="container">
+  <h1>Confirm Transportation Deletion</h1>
+  <p>Are you sure you want to delete {{ obj }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete {{ obj }}</button>
+    <a href="{% url 'transportation:transportation' obj.type %}" class="btn btn-secondary">Cancel</a>
+  </form>
 </div>
 
-{% endblock content %}
+

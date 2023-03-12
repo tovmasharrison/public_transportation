@@ -68,7 +68,7 @@ def create_transport(request):
             return redirect('/')
 
     context = {'title': title, 'form': form}
-    return render(request, 'stop/create_stop.html', context)
+    return render(request, 'transport/create_transport.html', context)
 
 
 @action_superuser
@@ -86,7 +86,7 @@ def update_transport(request, pk):
             messages.success(request, 'The transport was updated successfully!')
             return redirect(transport)
     context = {'title': title, 'form': form}
-    return render(request, 'stop/create_stop.html', context)
+    return render(request, 'transport/create_transport.html', context)
 
 
 @action_superuser
