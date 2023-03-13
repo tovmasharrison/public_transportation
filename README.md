@@ -50,7 +50,7 @@ $ python manage.py runserver_plus --cert-file cert.crt
 
 To use the Celery task, run Celery Worker and Celery Beat:
 
-Celery: celery -A final_project worker -B -l info
+Celery: $ celery -A final_project worker -B -l info
 
 
 
