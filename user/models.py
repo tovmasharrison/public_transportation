@@ -13,7 +13,7 @@ User = get_user_model()
 class Profile(models.Model):
     """ User Profile model """
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
     image = models.ImageField(upload_to=upload_profile_image, default=default_profile_image)
 
