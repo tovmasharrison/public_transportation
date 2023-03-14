@@ -19,7 +19,7 @@
 * User Registration(Username/Email), Login, 
   Password Change and Reset Through Email
 
-* Celery
+* Celery, Redis
 
 * Web Scrapper and PDF Extractor for Transport Information
 
