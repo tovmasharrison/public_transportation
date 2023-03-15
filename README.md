@@ -3,7 +3,7 @@
 ## Introduction
 
   This is a project for the Public Transportation in Armenia to help people find the appropriate Transports for their route by searching or viewing all the transportations and their details and also allows users to rate a specific Transport,leave a review, like a review and add comments to it. The goal of this project is to improve the quality of public transportation by allowing the users to leave reviews and get a better reach.
-  The information regarding to the transportation type, number and route are being constantly checked and updated by using CELERY.
+  The information regarding to the transportation type, number and route are being constantly checked and updated using CELERY.
   
  Project is written in Django 4.1.6 and Python 3.
 
