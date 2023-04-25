@@ -32,7 +32,7 @@
 
 Clone the repository from GitHub:
 
-$ git clone git@github.com/USERNAME/{{ project_name }}.git
+`$ git clone git@github.com/USERNAME/{{ project_name }}.git`
 
 Activate the virtualenv for your project.
 
@@ -52,25 +52,6 @@ To use the Celery task, run Celery Worker and Celery Beat:
 
 $ celery -A final_project worker -B -l info
 
-
-```bash
-# Clone the repository from GitHub
-$ git clone git@github.com/USERNAME/{{ project_name }}.git
-
-# Activate the virtualenv for your project
-source /path/to/venv/bin/activate
-
-# Install project dependencies
-$ pip install -r requirements.txt
-
-# Apply the migrations
-$ python manage.py migrate
-
-# Run the server with SSL certificate
-$ python manage.py runserver_plus --cert-file cert.crt
-
-# Run Celery Worker and Celery Beat
-$ celery -A final_project worker -B -l info
 
 
 
