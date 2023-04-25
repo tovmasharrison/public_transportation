@@ -31,26 +31,31 @@
 ## Usage
 
 Clone the repository from GitHub:
-
-`$ git clone git@github.com/USERNAME/{{ project_name }}.git`
+```bash
+$ git clone git@github.com/USERNAME/{{ project_name }}.git
+```
 
 Activate the virtualenv for your project.
 
 Install project dependencies:
-
+```bash
 $ pip install -r requirements.txt
+```
 
 Then simply apply the migrations:
-
+```bash
 $ python manage.py migrate
+```
 
 To be able to use the Google Authentication run the server as shown below and navigate to https://publictransport.com:8000
-
+```bash
 $ python manage.py runserver_plus --cert-file cert.crt
+```
 
 To use the Celery task, run Celery Worker and Celery Beat:
-
+```bash
 $ celery -A final_project worker -B -l info
+````
 
 
 
